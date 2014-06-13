@@ -1,0 +1,14 @@
+{
+  "name": "autocomplete",
+  "scripts": [
+    "index.js",
+    "lib/InputView.js",
+	"lib/ListView.js",
+    "lib/Presenter.js"
+  ],
+  "dependencies": {
+    "component/emitter": "*",
+    "digitaledgeit/js-view": "*",
+    "digitaledgeit/js-view-collection": "*"
+  }
+}

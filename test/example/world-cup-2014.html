@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        .is-hidden {
+            display: none;
+        }
+
+        .is-selected {
+            background-color: skyblue;
+        }
+
+        .autocomplete__input {
+            margin: 0;
+            padding: 5px;
+            outline: none;
+        }
+
+        .autocomplete__list {
+            position: absolute;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+        .autocomplete-list__item {
+            padding: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="autocomplete">
+        <input type="text" class="autocomplete__input js-autocomplete" autocomplete="off" autofocus/>
+    </div>
+
+    <script src="../../build/build.js"></script>
+    <script src="../data/world-cup-teams-2014.js"></script>
+    <script>
+
+        /**
+         * Suggest options based on the query
+         * @param   {String}    query
+         * @param   {Array}     items
+         * @param   {Object}    options
+         * @param   {Boolean}   options.limit
+         * @param   {Boolean}   options.ignoreCase
+         * @returns {Array}
+         */
+        function suggest(query, items, options) {
+            var suggestions = [];
+
+            //handle case sensitivity
+            if (options && options.ignoreCase) {
+                query = query.toLowerCase();
+            }
+
+            for (var i=0; i<items.length; ++i) {
+                var item = items[i];
+
+                //handle limits
+                if (options && suggestions.length >= options.limit) {
+                    return suggestions;
+                }
+
+                //handle case sensitivity
+                if (options && options.ignoreCase) {
+                    item = item.toLowerCase();
+                }
+
+                if (item.indexOf(query) !== -1) {
+                    suggestions.push(items[i]);
+                }
+
+            }
+
+            return suggestions;
+        }
+
+        /**
+         * Suggest options based on a query, after a delay
+         * @param   {Array}     items
+         * @param   {Object}    options
+         * @returns {Function}
+         */
+        function delayedSuggest(items, options) {
+            var timeout;
+            return function(query, cb) {
+                window.clearTimeout(timeout);
+                timeout = window.setTimeout(function() {
+                    cb(suggest(query, items, options));
+                }, 500);
+            };
+        }
+
+        var presenter = require('autocomplete')({
+            el:             document.querySelector('.js-autocomplete'),
+            source:         delayedSuggest(teams, {limit: 6, ignoreCase: true}),
+            template:       function(query, suggestion) {
+                return '<div>'+suggestion+'</div>';
+            }
+        });
+
+    </script>
+</body>
+</html>
