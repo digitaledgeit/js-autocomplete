@@ -1,8 +1,8 @@
-var Presenter       = require('./lib/Presenter');
 var View            = require('view');
 //var TemplateView    = require('template-view');
-var CollectionView  = require('./lib/ListView');
+var Presenter       = require('./lib/Presenter');
 var InputView       = require('./lib/InputView');
+var ListView        = require('./lib/ListView');
 
 /**
  * Create an autocomplete instance
@@ -19,7 +19,7 @@ module.exports = function(options) {
 
     inputView:  new InputView({el: options.el}),
 
-    listView:   new CollectionView({
+    listView:   new ListView({
       el: {
         tag:      'div',
         classes:  'autocomplete__list is-hidden'
@@ -57,3 +57,7 @@ module.exports = function(options) {
 
   return new Presenter(presenter);
 };
+
+module.exports.Presenter  = Presenter;
+module.exports.InputView  = InputView;
+module.exports.ListView   = ListView;
