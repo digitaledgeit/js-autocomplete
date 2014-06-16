@@ -104,8 +104,12 @@
             }
         });
 
+        presenter.on('suggest', function(suggestions) {
+            console.log('Suggested: ',suggestions);
+        });
+
         presenter.on('select', function(suggestion) {
-	        console.log(suggestion);
+	        console.log('Selected: ', suggestion);
         });
 
 
