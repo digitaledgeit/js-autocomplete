@@ -9,6 +9,6 @@
   "dependencies": {
     "component/emitter": "1.1.2",
     "digitaledgeit/js-view": "0.1.4",
-    "digitaledgeit/js-view-collection": "0.1.1"
+    "digitaledgeit/js-view-collection": "0.1.5"
   }
 }

@@ -44,7 +44,14 @@ module.exports = function(options) {
       }
 
       //create a view from the element
-      return new View({el: output});
+      var view = new View({
+	      el: output,
+	      events: {
+		      'click': 'emit:select'
+	      }
+      });
+
+	  return view;
 
 //      return new TemplateView({
 //        data:     suggestion,
