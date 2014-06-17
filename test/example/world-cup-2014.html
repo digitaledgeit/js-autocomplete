@@ -90,10 +90,7 @@
         function delayedSuggest(items, options) {
             var timeout;
             return function(query, cb) {
-                window.clearTimeout(timeout);
-                timeout = window.setTimeout(function() {
-                    cb(suggest(query, items, options));
-                }, 500);
+	            cb(suggest(query, items, options));
             };
         }
 
