@@ -5,7 +5,7 @@ var InputView       = require('./lib/InputView');
 var ListView        = require('./lib/ListView');
 
 /**
- * Create an autocomplete instance
+ * Create an suggest instance
  * @param   {Object}            options
  * @param   {HTMLElement}       options.el        The input element
  * @param   {Function|Array}    options.source    The data source
@@ -17,13 +17,12 @@ module.exports = function(options) {
 
     source:     options.source,
 
-    inputView:  new InputView({el: options.el}),
+    inputView:  new InputView({
+	    el: options.el.querySelector('.js-input')
+    }),
 
     listView:   new ListView({
-      el: {
-        tag:      'div',
-        classes:  'autocomplete__list is-hidden'
-      }
+      el: options.el.querySelector('.js-list')
     }),
 
     listItemViewFactory: function(query, suggestion) {
