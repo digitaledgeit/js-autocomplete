@@ -22,19 +22,7 @@ module.exports = function(options) {
     }),
 
     dropDownView: new DropDownView({
-		el: options.el.querySelector('.js-dropdown'),
-		header: new View({
-			el: {
-				tag: 'p',
-				content: 'This is the header'
-			}
-		}),
-	    footer: new View({
-		    el: {
-			    tag: 'p',
-			    content: 'This is the footer'
-		    }
-	    })
+		el: options.el.querySelector('.js-dropdown')
     }),
 
     listItemViewFactory: function(query, suggestion) {
