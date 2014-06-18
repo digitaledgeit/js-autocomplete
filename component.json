@@ -3,6 +3,7 @@
   "scripts": [
     "index.js",
     "lib/InputView.js",
+	"lib/DropDownView.js",
 	"lib/ListView.js",
     "lib/Presenter.js"
   ],

@@ -35,7 +35,7 @@
 
     <div class="autocomplete js-autocomplete">
         <input type="text" class="autocomplete__input js-input" autocomplete="off" autofocus/>
-	    <div class="autocomplete__list js-list"></div>
+	    <div class="autocomplete__list is-hidden js-dropdown"></div>
     </div>
 
     <script src="../../build/build.js"></script>
@@ -102,11 +102,11 @@
             }
         });
 
-        presenter.on('query', function(suggestions) {
+        presenter.on('suggest', function(suggestions) {
             console.log('Suggested: ',suggestions);
         });
 
-        presenter.on('complete', function(suggestion) {
+        presenter.on('select', function(suggestion) {
 	        console.log('Selected: ', suggestion);
         });
 

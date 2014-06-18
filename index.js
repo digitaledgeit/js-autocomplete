@@ -2,7 +2,7 @@ var View            = require('view');
 //var TemplateView    = require('template-view');
 var Presenter       = require('./lib/Presenter');
 var InputView       = require('./lib/InputView');
-var ListView        = require('./lib/ListView');
+var DropDownView    = require('./lib/DropDownView');
 
 /**
  * Create an suggest instance
@@ -15,14 +15,26 @@ module.exports = function(options) {
 
   var presenter = {
 
-    source:     options.source,
+    source: options.source,
 
-    inputView:  new InputView({
+    inputView: new InputView({
 	    el: options.el.querySelector('.js-input')
     }),
 
-    listView:   new ListView({
-      el: options.el.querySelector('.js-list')
+    dropDownView: new DropDownView({
+		el: options.el.querySelector('.js-dropdown'),
+		header: new View({
+			el: {
+				tag: 'p',
+				content: 'This is the header'
+			}
+		}),
+	    footer: new View({
+		    el: {
+			    tag: 'p',
+			    content: 'This is the footer'
+		    }
+	    })
     }),
 
     listItemViewFactory: function(query, suggestion) {
@@ -66,4 +78,4 @@ module.exports = function(options) {
 
 module.exports.Presenter  = Presenter;
 module.exports.InputView  = InputView;
-module.exports.ListView   = ListView;
+module.exports.ListView   = DropDownView;
