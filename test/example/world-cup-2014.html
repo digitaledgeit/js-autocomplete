@@ -99,7 +99,8 @@
             source:         delayedSuggest(teams, {limit: 6, ignoreCase: true}),
             template:       function(query, suggestion) {
                 return '<div>'+suggestion+'</div>';
-            }
+            },
+	        hideDropDownIfEmpty: false
         });
 
         presenter.on('suggest', function(suggestions) {

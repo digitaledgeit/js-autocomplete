@@ -15,6 +15,8 @@ module.exports = function(options) {
 
   var presenter = {
 
+	hideDropDownIfEmpty: options.hideDropDownIfEmpty,
+
     source: options.source,
 
     inputView: new InputView({
@@ -22,7 +24,8 @@ module.exports = function(options) {
     }),
 
     dropDownView: new DropDownView({
-		el: options.el.querySelector('.js-dropdown')
+		el: options.el.querySelector('.js-dropdown'),
+	    header: new View({el: {tag: 'h1', content: 'Test'}})
     }),
 
     listItemViewFactory: function(query, suggestion) {
