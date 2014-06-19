@@ -103,6 +103,10 @@
 	        hideDropDownIfEmpty: true
         });
 
+        presenter.on('change', function() {
+	        console.log('Changed');
+        });
+
         presenter.on('suggest', function(suggestions) {
             console.log('Suggested: ',suggestions);
         });
