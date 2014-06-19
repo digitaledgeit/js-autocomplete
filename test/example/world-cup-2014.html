@@ -100,7 +100,7 @@
             template:       function(query, suggestion) {
                 return '<div>'+suggestion+'</div>';
             },
-	        hideDropDownIfEmpty: false
+	        hideDropDownIfEmpty: true
         });
 
         presenter.on('suggest', function(suggestions) {
