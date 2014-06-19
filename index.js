@@ -1,72 +1,75 @@
-var View            = require('view');
+var View = require('view');
 //var TemplateView    = require('template-view');
-var Presenter       = require('./lib/Presenter');
-var InputView       = require('./lib/InputView');
-var DropDownView    = require('./lib/DropDownView');
+var Presenter = require('./lib/Presenter');
+var InputView = require('./lib/InputView');
+var DropDownView = require('./lib/DropDownView');
 
 /**
  * Create an suggest instance
  * @param   {Object}            options
  * @param   {HTMLElement}       options.el        The input element
- * @param   {Function|Array}    options.source    The data source
+ * @param   {array|function(string, function(*, array))}    options.source      A suggestion source
+ * @param   {string|function(*)}                            [options.display]   A key or function used to convert the suggestion to a string
  * @returns {Presenter}
  */
-module.exports = function(options) {
+module.exports = function (options) {
 
-  var presenter = {
+	var presenter = {
 
-	hideDropDownIfEmpty: options.hideDropDownIfEmpty,
+		hideDropDownIfEmpty: options.hideDropDownIfEmpty,
 
-    source: options.source,
+		source: options.source,
 
-    inputView: new InputView({
-	    el: options.el.querySelector('.js-input')
-    }),
+		display: options.display,
 
-    dropDownView: new DropDownView({
-		el: options.el.querySelector('.js-dropdown'),
-	    header: new View({el: {tag: 'h1', content: 'Test'}})
-    }),
+		inputView: new InputView({
+			el: options.el.querySelector('.js-input')
+		}),
 
-    listItemViewFactory: function(query, suggestion) {
-      var output, el;
+		dropDownView: new DropDownView({
+			el: options.el.querySelector('.js-dropdown'),
+			header: new View({el: {tag: 'h1', content: 'Test'}})
+		}),
 
-      //convert the template to a string or HTML element
-      if (typeof options.template === 'function') {
-        output = options.template(query, suggestion);
-      } else {
-        output = options.template;
-      }
+		listItemViewFactory: function (query, suggestion) {
+			var output, el;
 
-      //convert the output to an element
-      if (typeof output === 'string') {
-        var el = document.createElement('div');
-        el.className = 'autocomplete-list__item';
-        el.innerHTML = output;
-        output = el;
-      }
+			//convert the template to a string or HTML element
+			if (typeof options.template === 'function') {
+				output = options.template(query, suggestion);
+			} else {
+				output = options.template;
+			}
 
-      //create a view from the element
-      var view = new View({
-	      el: output,
-	      events: {
-		      'click': 'emit:select'
-	      }
-      });
+			//convert the output to an element
+			if (typeof output === 'string') {
+				var el = document.createElement('div');
+				el.className = 'autocomplete-list__item';
+				el.innerHTML = output;
+				output = el;
+			}
 
-	  return view;
+			//create a view from the element
+			var view = new View({
+				el: output,
+				events: {
+					'click': 'emit:select'
+				}
+			});
+
+			return view;
 
 //      return new TemplateView({
 //        data:     suggestion,
 //        template: options.template
 //      });
-    }
+		}
 
-  };
+	};
 
-  return new Presenter(presenter);
+	return new Presenter(presenter);
 };
 
-module.exports.Presenter        = Presenter;
-module.exports.InputView        = InputView;
-module.exports.DropDownView   	= DropDownView;
+module.exports.Presenter = Presenter;
+module.exports.InputView = InputView;
+module.exports.DropDownView = DropDownView;

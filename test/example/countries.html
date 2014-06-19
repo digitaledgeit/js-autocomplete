@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        .is-hidden {
+            display: none;
+        }
+
+        .is-selected {
+            background-color: skyblue;
+        }
+
+        .autocomplete__input {
+            box-sizing: border-box;
+	        width: 100%;
+	        margin: 0;
+            padding: 5px;
+            outline: none;
+        }
+
+        .autocomplete__list {
+            position: absolute;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+        .autocomplete-list__item {
+            padding: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="autocomplete js-autocomplete">
+        <input type="text" class="autocomplete__input js-input" autocomplete="off" autofocus/>
+	    <div class="autocomplete__list is-hidden js-dropdown"></div>
+    </div>
+
+    <script src="../../build/build.js"></script>
+    <script src="../data/countries.js"></script>
+    <script>
+
+        /**
+         * Suggest items based on the query
+         * @param   {array}     countries
+         * @param   {object}    [options]
+         * @param   {boolean}   [options.limit]
+         * @param   {boolean}   [options.ignore_case]
+         * @returns {function(string, function(*, array))}
+         */
+        function suggest(countries, options) {
+	        return function(query) {
+		        var suggestions = [];
+
+		        //handle case sensitivity
+		        if (options && options.ignore_case) {
+			        query = query.toLowerCase();
+		        }
+
+		        for (var i=0; i<countries.length; ++i) {
+			        var country = countries[i].name;
+
+			        //handle limits
+			        if (options && suggestions.length >= options.limit) {
+				        return suggestions;
+			        }
+
+			        //handle case sensitivity
+			        if (options && options.ignore_case) {
+				        country = country.toLowerCase();
+			        }
+
+			        //check limits
+			        if (country.indexOf(query) !== -1) {
+				        suggestions.push(countries[i]);
+			        }
+
+		        }
+
+		        return suggestions;
+	        };
+        }
+
+        var presenter = require('autosuggest')({
+            el:             document.querySelector('.js-autocomplete'),
+            source:         suggest(countries, {limit: 6, ignore_case: true}),
+	        display:        'name',
+            template:       function(query, country) {
+                return '<div>'+country.name+'</div>';
+            },
+	        hideDropDownIfEmpty: true
+        });
+
+        presenter.on('change', function() {
+	        console.log('Changed');
+        });
+
+        presenter.on('suggest', function(suggestions) {
+            console.log('Suggested: ',suggestions);
+        });
+
+        presenter.on('select', function(suggestion) {
+	        console.log('Selected: ', suggestion);
+        });
+
+
+    </script>
+</body>
+</html>
