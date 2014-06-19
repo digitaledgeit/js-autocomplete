@@ -67,6 +67,6 @@ module.exports = function(options) {
   return new Presenter(presenter);
 };
 
-module.exports.Presenter  = Presenter;
-module.exports.InputView  = InputView;
-module.exports.ListView   = DropDownView;
+module.exports.Presenter        = Presenter;
+module.exports.InputView        = InputView;
+module.exports.DropDownView   	= DropDownView;
