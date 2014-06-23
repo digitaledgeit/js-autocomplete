@@ -5,12 +5,21 @@
     <title></title>
     <style>
 
+	    html, body {
+		    font-size: 14px;
+		    font-family: trebuchet ms, geneva, arial, helvetica, sans-serif;
+	    }
+
         .is-hidden {
             display: none;
         }
 
         .is-selected {
-            background-color: skyblue;
+            background-color: rgb(223, 237, 242);
+        }
+
+        .autocomplete {
+	        position: relative;
         }
 
         .autocomplete__input {
@@ -24,6 +33,8 @@
 
         .autocomplete__list {
             position: absolute;
+	        box-sizing: border-box;
+	        width: 100%;
             border: 1px solid #ccc;
             border-top: none;
         }

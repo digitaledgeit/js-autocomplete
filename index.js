@@ -22,13 +22,14 @@ module.exports = function (options) {
 
 		display: options.display,
 
+		minLength: options.minLength,
+
 		inputView: new InputView({
 			el: options.el.querySelector('.js-input')
 		}),
 
 		dropDownView: new DropDownView({
-			el: options.el.querySelector('.js-dropdown'),
-			header: new View({el: {tag: 'h1', content: 'Test'}})
+			el: options.el.querySelector('.js-dropdown')
 		}),
 
 		listItemViewFactory: function (query, suggestion) {
@@ -70,6 +71,6 @@ module.exports = function (options) {
 	return new Presenter(presenter);
 };
 
-module.exports.Presenter = Presenter;
-module.exports.InputView = InputView;
+module.exports.Presenter    = Presenter;
+module.exports.InputView    = InputView;
 module.exports.DropDownView = DropDownView;
