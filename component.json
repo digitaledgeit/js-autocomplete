@@ -1,16 +1,23 @@
 {
-  "name": "autosuggest",
-  "scripts": [
-    "index.js",
-    "lib/InputView.js",
-	"lib/DropDownView.js",
-	"lib/ListView.js",
-    "lib/Presenter.js"
-  ],
-  "dependencies": {
-    "component/emitter": "1.1.2",
-	"digitaledgeit/js-input-event": "0.1.1",
-	"digitaledgeit/js-view": "0.1.4",
-    "digitaledgeit/js-view-collection": "0.1.5"
-  }
+	"name": "autosuggest",
+	"scripts": [
+		"index.js",
+		"lib/InputView.js",
+		"lib/DropDownView.js",
+		"lib/ListView.js",
+		"lib/Presenter.js",
+		"lib/matcher.js"
+	],
+	"dependencies": {
+		"component/emitter": "1.1.2",
+		"digitaledgeit/js-input-event": "0.1.1",
+		"digitaledgeit/js-view": "0.1.4",
+		"digitaledgeit/js-view-collection": "0.1.5"
+	},
+	"development": {
+		"scripts": ["test/data/countries.js"],
+		"dependencies": {
+			"component/assert": "*"
+		}
+	}
 }

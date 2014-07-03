@@ -1,4 +1,4 @@
-var countries = [
+module.exports = [
 	{name: 'Afghanistan', code: 'AF'},
 	{name: 'Åland Islands', code: 'AX'},
 	{name: 'Albania', code: 'AL'},
@@ -242,4 +242,4 @@ var countries = [
 	{name: 'Yemen', code: 'YE'},
 	{name: 'Zambia', code: 'ZM'},
 	{name: 'Zimbabwe', code: 'ZW'}
-]
+];

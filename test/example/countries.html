@@ -18,11 +18,11 @@
             background-color: rgb(223, 237, 242);
         }
 
-        .autocomplete {
+        .autosuggest {
 	        position: relative;
         }
 
-        .autocomplete__input {
+        .autosuggest__input {
             box-sizing: border-box;
 	        width: 100%;
 	        margin: 0;
@@ -31,7 +31,7 @@
             outline: none;
         }
 
-        .autocomplete__list {
+        .autosuggest__dropdown {
             position: absolute;
 	        box-sizing: border-box;
 	        width: 100%;
@@ -39,76 +39,42 @@
             border-top: none;
         }
 
-        .autocomplete-list__item {
+        .autosuggest__suggestion {
             padding: 5px;
 	        cursor: default;
         }
 
-	    .autocomplete-list__item:hover {
+	    .autosuggest__suggestion:hover {
 		    background-color: #efefef;
+	    }
+
+	    .country__code {
+		    float: right;
 	    }
 
     </style>
 </head>
 <body>
 
-    <div class="autocomplete js-autocomplete">
-        <input type="text" class="autocomplete__input js-input" autocomplete="off" autofocus/>
-	    <div class="autocomplete__list is-hidden js-dropdown"></div>
+    <div class="autosuggest js-autosuggest">
+        <input class="autosuggest__input js-input" type="text" autocomplete="off" autofocus/>
+	    <div class="autosuggest__dropdown is-hidden js-dropdown"></div>
     </div>
 
     <script src="../../build/build.js"></script>
-    <script src="../data/countries.js"></script>
     <script>
 
-        /**
-         * Suggest items based on the query
-         * @param   {array}     countries
-         * @param   {object}    [options]
-         * @param   {boolean}   [options.limit]
-         * @param   {boolean}   [options.ignore_case]
-         * @returns {function(string, function(*, array))}
-         */
-        function suggest(countries, options) {
-	        return function(query) {
-		        var suggestions = [];
-
-		        //handle case sensitivity
-		        if (options && options.ignore_case) {
-			        query = query.toLowerCase();
-		        }
-
-		        for (var i=0; i<countries.length; ++i) {
-			        var country = countries[i].name;
-
-			        //handle limits
-			        if (options && suggestions.length >= options.limit) {
-				        return suggestions;
-			        }
-
-			        //handle case sensitivity
-			        if (options && options.ignore_case) {
-				        country = country.toLowerCase();
-			        }
-
-			        //check limits
-			        if (country.indexOf(query) !== -1) {
-				        suggestions.push(countries[i]);
-			        }
-
-		        }
-
-		        return suggestions;
-	        };
-        }
+	    var countries   = require('autosuggest/test/data/countries.js');
+		var matcher     = require('autosuggest/lib/matcher.js');
 
         var presenter = require('autosuggest')({
-            el:             document.querySelector('.js-autocomplete'),
-            source:         suggest(countries, {limit: 6, ignore_case: true}),
+            el:             document.querySelector('.js-autosuggest'),
+            source:         matcher(countries, {properties: ['name'], limit: 6, ignore_case: true}),
 	        display:        'name',
             template:       function(query, country) {
-                return '<div>'+country.name+'</div>';
+                return '<div class="country__code">'+country.code+'</div><div class="country__name">'+country.name+'</div>';
             },
+	        minLength: 1,
 	        hideDropDownIfEmpty: true
         });
 
@@ -123,7 +89,6 @@
         presenter.on('select', function(suggestion) {
 	        console.log('Selected: ', suggestion);
         });
-
 
     </script>
 </body>
