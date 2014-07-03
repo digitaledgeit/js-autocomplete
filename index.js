@@ -45,7 +45,7 @@ module.exports = function (options) {
 			//convert the output to an element
 			if (typeof output === 'string') {
 				var el = document.createElement('div');
-				el.className = 'autocomplete-list__item';
+				el.className = 'autosuggest__suggestion';
 				el.innerHTML = output;
 				output = el;
 			}
