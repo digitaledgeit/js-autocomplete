@@ -39,12 +39,12 @@
             border-top: none;
         }
 
-        .autosuggest__suggestion {
+        .country {
             padding: 5px;
 	        cursor: default;
         }
 
-	    .autosuggest__suggestion:hover {
+	    .country:hover {
 		    background-color: #efefef;
 	    }
 
@@ -75,7 +75,8 @@
                 return '<div class="country__code">'+country.code+'</div><div class="country__name">'+country.name+'</div>';
             },
 	        minLength: 1,
-	        hideDropDownIfEmpty: true
+	        hideDropDownIfEmpty: true,
+            listItemClasses: 'country'
         });
 
         presenter.on('change', function() {
