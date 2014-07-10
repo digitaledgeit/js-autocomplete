@@ -46,6 +46,10 @@ module.exports = function (options) {
 			if (typeof output === 'string') {
 				var el = document.createElement('div');
 				el.className = 'autosuggest__suggestion';
+                if (options.suggestionItemClasses) {
+                    el.className += (' ' + options.suggestionItemClasses);
+                }
+
 				el.innerHTML = output;
 				output = el;
 			}
