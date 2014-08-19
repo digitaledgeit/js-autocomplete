@@ -12,7 +12,7 @@
 		"component/emitter": "1.1.2",
 		"digitaledgeit/js-input-event": "0.1.1",
 		"digitaledgeit/js-view": "0.1.4",
-		"digitaledgeit/js-view-collection": "0.1.5"
+		"digitaledgeit/js-view-collection": "~0.1.7"
 	},
 	"development": {
 		"scripts": ["test/data/countries.js"],
