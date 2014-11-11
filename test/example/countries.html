@@ -83,6 +83,10 @@
 	        console.log('Changed');
         });
 
+        presenter.on('blur', function() {
+            console.log('Blurred');
+        });
+
         presenter.on('suggest', function(suggestions) {
             console.log('Suggested: ',suggestions);
         });
