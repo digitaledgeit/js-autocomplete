@@ -1,5 +1,6 @@
 {
 	"name": "autosuggest",
+	"description": "An auto suggest input.",
 	"scripts": [
 		"index.js",
 		"lib/InputView.js",
