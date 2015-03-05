@@ -34,6 +34,7 @@ An auto suggest input.
 - `display`		-
 - `template`	-
 
+- selectItemWhenTabPressed - Select items when the user presses tab and an item in the drop down list is selected (using the arrow keys)
 
 ### .open()
 
