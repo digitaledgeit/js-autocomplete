@@ -29,6 +29,7 @@ An auto suggest input.
 - `hint` 		-
 - `highlight` 	-
 - `minlength` 	- The minimum number of characters the user must enter before any suggestions are fetched.
+- `canSuggest`    - A function that determines whether a suggestion should be made for the query
 
 - `source` 		- A suggestion source - an array of suggestions, a `function(query : string)` that returns an array of suggestions or a `function(query : string, done : function(suggestions : array))` that calls the `done` method.
 - `display`		-

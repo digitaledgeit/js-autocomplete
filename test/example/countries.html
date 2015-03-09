@@ -79,7 +79,8 @@
             template:       function(query, country) {
                 return '<div class="country__code">'+country.code+'</div><div class="country__name">'+country.name+'</div>';
             },
-	        minLength: 1,
+//	        minLength: 1,
+            canSuggest: function(query) {return query.match(/[A-Z]/); },
 	        hideDropDownIfEmpty: true,
             listItemClasses: 'country'
         });

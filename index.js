@@ -23,6 +23,7 @@ module.exports = function (options) {
 		display: options.display,
 
 		minLength: options.minLength,
+		canSuggest: options.canSuggest,
 
 		inputView: new InputView({
 			el: options.el.querySelector('.js-input')
